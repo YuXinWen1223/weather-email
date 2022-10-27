@@ -1,6 +1,6 @@
 target/
 .gitignore
-*.properties
+**.properties
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
@@ -12,8 +12,6 @@ target/
 .settings
 .springBeans
 .sts4-cache
-.gitignore
-*.properties
 ### IntelliJ IDEA ###
 **/target
 **/mvnw
