@@ -1,9 +1,7 @@
-HELP.md
 target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
-.gitignore
 ### STS ###
 .apt_generated
 .classpath
@@ -12,8 +10,11 @@ target/
 .settings
 .springBeans
 .sts4-cache
-
+.gitignore
+*.properties
 ### IntelliJ IDEA ###
+.gitignore
+*.properties
 **/target
 **/mvnw
 *.cmd
