@@ -1,4 +1,6 @@
 target/
+.gitignore
+*.properties
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
@@ -13,8 +15,6 @@ target/
 .gitignore
 *.properties
 ### IntelliJ IDEA ###
-.gitignore
-*.properties
 **/target
 **/mvnw
 *.cmd
