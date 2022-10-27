@@ -3,7 +3,7 @@ target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
-
+.gitignore
 ### STS ###
 .apt_generated
 .classpath
@@ -17,14 +17,11 @@ target/
 **/target
 **/mvnw
 *.cmd
-#*.html
 .mvn
 .idea
 *.iws
 *.iml
 *.ipr
-#.gitignore
-#*.properties
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/
