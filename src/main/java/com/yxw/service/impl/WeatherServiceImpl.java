@@ -79,12 +79,12 @@ public class WeatherServiceImpl extends ServiceImpl<WeatherMapper, Weather> impl
             mimeMessageHelper.setText(buildHtml(getWeather(weather).get(0), weather), true);
             emailSender.send(message);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e.getMessage(), e);
         }
     }
 
     private List<Meteorological> getWeather(Weather list) {
-        HttpRequest httpRequest = HttpUtil.createGet("https://www.tianqiapi.com/api?version=v1&" + "appid=" + appId + "&appsecret=" + appSecret + "&cityid=" + list.getCityId());
+        HttpRequest httpRequest = HttpUtil.createGet("http://www.tianqiapi.com/api?version=v1&" + "appid=" + appId + "&appsecret=" + appSecret + "&cityid=" + list.getCityId());
         String res = httpRequest.execute().body();
         Object data = JSON.parseObject(res).get("data");
         city = JSON.parseObject(res).get("city");
@@ -93,15 +93,16 @@ public class WeatherServiceImpl extends ServiceImpl<WeatherMapper, Weather> impl
 
 
     private String buildHtml(Meteorological meteorological, Weather list) {
+
         StringBuffer html = new StringBuffer();
         String airTips = meteorological.getAirTips();
         html.append("<!DOCTYPE html>\n" + "<html>\n" + "<head>\n" + "<meta charset=\"utf-8\">\n" + "<title>文档标题</title>\n" + "</head><body>");
         html.append("<div class=\"table-wrapper\">");
         if (meteorological.getWea().contains(WEA)) {
-            html.append("<h1>").append(list.getPrompt()).append("</h1>");
+            html.append("<h1 style=\"color: red;\">").append(list.getPrompt()).append("</h1>");
         }
         if (meteorological.getWea().contains("")) {
-            html.append("<h1 style=\"color: red;\">").append(city).append("今日").append(meteorological.getWea()).append("，").append(airTips).append("</h1>");
+            html.append("<h1>").append(city).append("今日").append(meteorological.getWea()).append("，").append(airTips).append("</h1>");
         } else {
             html.append("<h1>").append(city).append("今日").append(meteorological.getWea()).append("</h1>");
         }
