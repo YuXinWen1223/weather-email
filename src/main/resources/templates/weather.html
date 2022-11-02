@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8"/>
+    <meta charset="utf-8" />
     <title></title>
     <!-- 引入样式 -->
     <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
@@ -18,9 +18,11 @@
     <a href="https://blog.csdn.net/qq_40266771/article/details/103905967">城市编码大全</a>
     <!-- 数据表格 -->
     <template>
-        <el-table :data="tableData" element-loading-text="数据加载中" border fit highlight-current-row
-        >
+        <el-table :data="tableData" element-loading-text="数据加载中" border fit highlight-current-row>
             <el-table-column prop="id" label="ID">
+                <template slot-scope="scope">
+                    {{ scope.$index + 1 }}
+                </template>
             </el-table-column>
             <el-table-column prop="name" label="姓名">
             </el-table-column>
@@ -40,7 +42,7 @@
         </el-table>
         <el-pagination :current-page="currentPage" :page-size="pagesize" :total="total"
                        style="padding: 30px 0; text-align: center" layout="total, prev, pager, next, jumper"
-                       @current-change="handleStudentList"/>
+                       @current-change="handleStudentList" />
     </template>
     <!-- 添加 -->
     <el-dialog :visible.sync="addvisible" title="添加">
@@ -88,7 +90,7 @@
                 <el-input v-model="form.mail"></el-input>
             </el-form-item>
             <el-form-item>
-                <el-button type="primary" @click="onSubmit('form')">立即创建</el-button>
+                <el-button type="primary" @click="onSubmit('form')">确定修改</el-button>
                 <el-button @click="visible = false">取消</el-button>
             </el-form-item>
         </el-form>
@@ -177,7 +179,7 @@
                     method: 'POST',
                     url: 'http://localhost:8085/weather/getListWeather/' + this.currentPage + '/' + this
                         .pagesize
-                }).then(function (ret) {
+                }).then(function(ret) {
                     vm.total = ret.data.data.total;
                     vm.tableData = ret.data.data.records;
                 })
@@ -189,7 +191,7 @@
                             method: 'POST',
                             url: 'http://localhost:8085/weather/addWeather',
                             data: this.addform
-                        }).then(function (ret) {
+                        }).then(function(ret) {
                             // res.data 是服务器返回的数据
                             if (ret.data.code === 200) {
                                 Vue.prototype.$message({
@@ -198,7 +200,7 @@
                                     type: 'success'
                                 });
                                 vm.addvisible = false;
-                                vm.addform = ''
+                                vm.addform = {}
                                 vm.handleStudentList();
 
                             } else if (ret.data.code === 500) {
@@ -207,7 +209,7 @@
                                     message: ret.data.message,
                                     type: 'success'
                                 });
-                                this.addform = ''
+                                this.addform = {}
                             } else {
                                 Vue.prototype.$message({
                                     showClose: true,
@@ -240,7 +242,7 @@
                             method: 'POST',
                             url: 'http://localhost:8085/weather/updateWeather',
                             data: this.form
-                        }).then(function (ret) {
+                        }).then(function(ret) {
                             // res.data 是服务器返回的数据
                             if (ret.data.code === 200) {
                                 Vue.prototype.$message({
@@ -248,7 +250,7 @@
                                     message: ret.data.message
                                 });
                                 vm.visible = false;
-                                vm.addform = ''
+                                vm.form = {}
                                 vm.handleStudentList();
                             } else if (ret.data.code === 500) {
                                 Vue.prototype.$message({
@@ -279,7 +281,7 @@
             }
 
         },
-        created: function () {
+        created: function() {
             //渲染数据
             this.handleStudentList();
         }

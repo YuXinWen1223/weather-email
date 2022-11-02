@@ -22,13 +22,12 @@ public class MybatisPlusConfig implements MetaObjectHandler {
     public void insertFill(MetaObject metaObject) {
         //属性名称，不是字段名称
         setFieldValByName("createTime", new Date(), metaObject);
-        setFieldValByName("updateTime", new Date(), metaObject);
 
     }
 
     @Override
     public void updateFill(MetaObject metaObject) {
-        setFieldValByName("updateTime", new Date(), metaObject);
+
     }
 
     /**

@@ -1,8 +1,9 @@
 package com.yxw.entity;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
-
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -41,7 +42,7 @@ public class Weather implements Serializable {
 
     private Integer cityId;
 
-
+    @TableField(fill = FieldFill.INSERT)
     private Date createTime;
 
     private Integer isDelete;
