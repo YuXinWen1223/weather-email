@@ -15,13 +15,22 @@
 
 ####  操作步骤:
 
-1. 进入自己QQ邮箱网页版点击账户找到如下图，把申请的密钥记下来：
+**1. 进入自己QQ邮箱网页版点击账户找到如下图，把申请的密钥记下来：**
+
 ![img_1.png](img_1.png)
-2. 进入 https://www.tianqiapi.com/user/login 注册登录申请ID密钥如下图：
+
+**2. 进入 https://www.tianqiapi.com/user/login 注册登录申请ID密钥如下图：**
+
 ![img_2.png](img_2.png)
-3. 导入数据库添加用户信息，数据库添加的信息对应邮件如下图：
+
+**3. 导入数据库添加用户信息，数据库添加的信息对应邮件如下图：**
+
 ![img_3.png](img_3.png)
-4. 在application.properties文件中填写你申请的密钥，天气ID
+
+**4. 在application.properties文件中填写你申请的密钥，天气ID**
+
 ![img_4.png](img_4.png)
-5. 5.启动SpringBoot，访问 http://localhost:8085/weather.html 进行信息添加
+
+**5. 启动SpringBoot，访问 http://localhost:8085/weather.html 进行信息添加**
+
 ![img_5.png](img_5.png)
