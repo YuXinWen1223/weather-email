@@ -9,7 +9,6 @@ import com.yxw.utils.Result;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -39,7 +38,6 @@ public class WeatherController {
      *
      * @return {@link Boolean}
      */
-    @Scheduled(cron = "0 0 07 * * ? ")
     @GetMapping("/list")
     public Boolean getWeather() {
         return weatherservice.sendSimpleMessage();
