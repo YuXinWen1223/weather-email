@@ -8,7 +8,6 @@ import com.yxw.service.WeatherService;
 import com.yxw.utils.Result;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -25,14 +24,14 @@ import java.util.List;
 @RestController
 @RequestMapping("/weather")
 @Log4j2
-@EnableScheduling
 public class WeatherController {
     @Resource
     private WeatherService weatherservice;
     @Value("${request.weather.addpid}")
-    private String APPID;
+    private String appId;
     @Value("${request.weather.appsecret}")
-    private String APPSECRET;
+    private String appSecret;
+
     /**
      * 得到天气发送邮箱
      *
@@ -45,8 +44,8 @@ public class WeatherController {
 
     @GetMapping("/test")
     public void test() {
-        log.warn("这是测试打印{}",APPID);
-        log.warn("这是测试打印{}",APPSECRET);
+        log.warn("这是测试打印{}", appId);
+        log.warn("这是测试打印{}", appSecret);
     }
 
     @PostMapping("/getListWeather/{current}/{limit}")

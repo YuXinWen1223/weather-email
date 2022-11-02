@@ -9,12 +9,12 @@ import com.yxw.entity.Meteorological;
 import com.yxw.entity.Weather;
 import com.yxw.mapper.WeatherMapper;
 import com.yxw.service.WeatherService;
-import lombok.Data;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 import javax.mail.internet.MimeMessage;
@@ -33,10 +33,9 @@ import java.util.Optional;
  */
 @Log4j2
 @Service
-@Data
 public class WeatherServiceImpl extends ServiceImpl<WeatherMapper, Weather> implements WeatherService {
     @Value("${request.weather.qq}")
-    private String FROM_MAIL;
+    private String fromMail;
     @Value("${request.weather.addpid}")
     private String appId;
     @Value("${request.weather.appsecret}")
@@ -48,7 +47,6 @@ public class WeatherServiceImpl extends ServiceImpl<WeatherMapper, Weather> impl
     @Resource
     private JavaMailSender emailSender;
     Object city;
-    List<Weather> list = null;
 
     /**
      * 发送简单信息
@@ -57,6 +55,7 @@ public class WeatherServiceImpl extends ServiceImpl<WeatherMapper, Weather> impl
      */
     @Override
     public boolean sendSimpleMessage() {
+        List<Weather> list;
         QueryWrapper<Weather> wrapper = new QueryWrapper<>();
         wrapper.eq("is_delete", 1);
         list = service.list(wrapper);
@@ -74,7 +73,7 @@ public class WeatherServiceImpl extends ServiceImpl<WeatherMapper, Weather> impl
             MimeMessage message = emailSender.createMimeMessage();
             MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(message, true);
             mimeMessageHelper.setTo(weather.getMail());
-            mimeMessageHelper.setFrom(FROM_MAIL);
+            mimeMessageHelper.setFrom(fromMail);
             mimeMessageHelper.setSubject(weather.getTitle());
             mimeMessageHelper.setText(buildHtml(getWeather(weather).get(0), weather), true);
             emailSender.send(message);
@@ -101,7 +100,7 @@ public class WeatherServiceImpl extends ServiceImpl<WeatherMapper, Weather> impl
         if (meteorological.getWea().contains(WEA)) {
             html.append("<h1 style=\"color: red;\">").append(list.getPrompt()).append("</h1>");
         }
-        if (meteorological.getWea().contains("")) {
+        if (StringUtils.hasText(airTips)) {
             html.append("<h1>").append(city).append("今日").append(meteorological.getWea()).append("，").append(airTips).append("</h1>");
         } else {
             html.append("<h1>").append(city).append("今日").append(meteorological.getWea()).append("</h1>");
