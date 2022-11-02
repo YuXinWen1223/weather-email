@@ -17,7 +17,8 @@
 
 **1. 进入自己QQ邮箱网页版点击账户找到如下图，把申请的密钥记下来：**
 
-<img alt="img_1.png" src="img_1.png"/>
+<img alt="img_1.png" src="
+https://xinwendegulimall.oss-cn-beijing.aliyuncs.com/img.png"/>
 
 **2. 进入 https://www.tianqiapi.com/user/login 注册登录申请ID密钥如下图：**
 
