@@ -33,4 +33,4 @@
 
 **5. 启动SpringBoot，访问 http://localhost:8085/weather.html 进行信息添加**
 
-![img_6.png](img_6.png)
+![img_5.png](img_5.png)
