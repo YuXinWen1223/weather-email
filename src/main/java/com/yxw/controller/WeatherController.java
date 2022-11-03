@@ -23,7 +23,6 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/weather")
-@CrossOrigin
 @Log4j2
 public class WeatherController {
     @Resource

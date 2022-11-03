@@ -9,6 +9,7 @@ import com.yxw.entity.Meteorological;
 import com.yxw.entity.Weather;
 import com.yxw.mapper.WeatherMapper;
 import com.yxw.service.WeatherService;
+import lombok.Data;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -33,6 +34,7 @@ import java.util.Optional;
  */
 @Log4j2
 @Service
+@Data
 public class WeatherServiceImpl extends ServiceImpl<WeatherMapper, Weather> implements WeatherService {
     @Value("${request.weather.qq}")
     private String fromMail;
