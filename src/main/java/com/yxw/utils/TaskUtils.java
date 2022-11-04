@@ -2,6 +2,7 @@ package com.yxw.utils;
 
 import com.yxw.service.WeatherService;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 
 import javax.annotation.Resource;
@@ -13,6 +14,7 @@ import javax.annotation.Resource;
  * @date :2022/11/2 9:32
  */
 @Configuration
+@EnableScheduling
 public class TaskUtils {
     @Resource
     private WeatherService weatherService;

@@ -42,7 +42,7 @@ public class WeatherServiceImpl extends ServiceImpl<WeatherMapper, Weather> impl
     private String appId;
     @Value("${request.weather.appsecret}")
     private String appSecret;
-    private final static String WEA = "雨";
+    private static final String WEA = "雨";
 
     @Resource
     private WeatherService service;
@@ -85,7 +85,7 @@ public class WeatherServiceImpl extends ServiceImpl<WeatherMapper, Weather> impl
     }
 
     private List<Meteorological> getWeather(Weather list) {
-        HttpRequest httpRequest = HttpUtil.createGet("http://www.tianqiapi.com/api?version=v1&" + "appid=" + appId + "&appsecret=" + appSecret + "&cityid=" + list.getCityId());
+        HttpRequest httpRequest = HttpUtil.createGet("www.tianqiapi.com/api?version=v1&" + "appid=" + appId + "&appsecret=" + appSecret + "&cityid=" + list.getCityId());
         String res = httpRequest.execute().body();
         Object data = JSON.parseObject(res).get("data");
         city = JSON.parseObject(res).get("city");
