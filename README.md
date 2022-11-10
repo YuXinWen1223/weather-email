@@ -10,8 +10,10 @@
 前端：Vue2+Element-UI+Axios
 #### 效果图
 
-<img src="https://xinwendegulimall.oss-cn-beijing.aliyuncs.com/img.png"/>
+<img src="https://xinwendegulimall.oss-cn-beijing.aliyuncs.com/img.01.png"/>
+
 **手机版**
+
 <img src="https://xinwendegulimall.oss-cn-beijing.aliyuncs.com/img_6.png"/>
 
 ####  操作步骤:
@@ -26,7 +28,7 @@
 
 **3. 导入数据库添加用户信息，数据库添加的信息对应邮件如下图：**
 
-<img src="https://xinwendegulimall.oss-cn-beijing.aliyuncs.com/img_3.png"/>
+<img src="https://xinwendegulimall.oss-cn-beijing.aliyuncs.com/img_03.png"/>
 
 **4. 在application.properties文件中填写你申请的密钥，天气ID**
 
