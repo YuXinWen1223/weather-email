@@ -67,11 +67,20 @@ public class Meteorological {
      * 空气质量描述
      */
     private String airTips;
-
+    /**
+     * 日出
+     */
+    private String sunrise;
+    /**
+     * 日落
+     */
+    private String sunset;
     /**
      * 建议
      */
     private List<Index> index;
-
+    /**
+     * 天气预警
+     */
     private Map<?, ?> alarm;
 }

@@ -11,7 +11,8 @@
 #### 效果图
 
 <img src="https://xinwendegulimall.oss-cn-beijing.aliyuncs.com/img.png"/>
-
+**手机版**
+<img src="https://xinwendegulimall.oss-cn-beijing.aliyuncs.com/img_6.png"/>
 
 ####  操作步骤:
 

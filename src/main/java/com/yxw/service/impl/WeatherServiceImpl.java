@@ -103,7 +103,7 @@ public class WeatherServiceImpl extends ServiceImpl<WeatherMapper, Weather> impl
             html.append("<h1 style=\"color: red;\">").append(list.getPrompt()).append("</h1>");
         }
         if (StringUtils.hasText(airTips)) {
-            html.append("<h1>").append(city).append("今日").append(meteorological.getWea()).append("，").append(airTips).append("</h1>");
+            html.append("<h1>").append(city).append("今日").append(meteorological.getWea()).append("，").append("空气质量").append(meteorological.getAirLevel()).append(",").append(airTips).append("</h1>");
         } else {
             html.append("<h1>").append(city).append("今日").append(meteorological.getWea()).append("</h1>");
         }
@@ -113,15 +113,19 @@ public class WeatherServiceImpl extends ServiceImpl<WeatherMapper, Weather> impl
             html.append("预警等级：<span style=\"color: red;\">").append(meteorological.getAlarm().get("alarmcontent")).append("</span>&nbsp&nbsp<br>");
             html.append("预警详情描述：<span style=\"color: red;\">").append(meteorological.getAlarm().get("alarmlevel")).append("</span>&nbsp&nbsp<br>");
         }
+        html.append("<h3 style=\"color: #00EC00;\">----------气温状况----------</h3>");
         html.append("最高温度：<span style=\"color: violet;\">").append(meteorological.getTem1()).append("</span>&nbsp&nbsp");
         html.append("最低温度：<span style=\"color:red;\">").append(meteorological.getTem2()).append("</span>&nbsp&nbsp");
         html.append("当前温度：<span style=\"color:green;\">").append(meteorological.getTem()).append("</span><br>");
         html.append("白天天气：<span style=\"color: #0000FF;\">").append(meteorological.getWeaDay()).append("</span>&nbsp&nbsp");
         html.append("夜间天气：<span style=\"color: #0000FF;\">").append(meteorological.getWeaNight()).append("</span>&nbsp&nbsp");
-        html.append("空气湿度：<span style=\"color: color:#5C3317;\">").append(meteorological.getHumidity()).append("</span>&nbsp&nbsp");
+        html.append("空气湿度：<span style=\"color: color:#5C3317;\">").append(meteorological.getHumidity()).append("</span><br>");
         html.append("浓见度：<span style=\"color: #0000FF;\">").append(meteorological.getVisibility()).append("</span>&nbsp&nbsp");
-        html.append("<table class=\"fl-table\"><tr><th>名称标题</th><th>强度</th><th>今日建议</th></tr>");
-        Optional.ofNullable(meteorological.getIndex()).orElse(new ArrayList<>()).forEach(whours -> html.append("<tr><td>").append(whours.getTitle()).append("</td><td>").append(whours.getLevel()).append("</td><td>").append(whours.getDesc()).append("</td><td>").append("</td><td>").append("</td></tr>"));
+        html.append("日出时间：<span style=\"color:red;\">").append(meteorological.getSunrise()).append("</span>&nbsp&nbsp");
+        html.append("日落时间：<span style=\"color: #0000FF;\">").append(meteorological.getSunset()).append("</span>&nbsp&nbsp");
+        html.append("<h3 style=\"color: #00EC00;\">----------今日建议----------</h3>");
+        html.append("<table class=\"fl-table\"><tr><th><b style=\"color: #804040;\">名称标题</b></th><th><b style=\"color: #804040;\">强度</b></th><th><b style=\"color: #804040;\">建议</b></th></tr>");
+        Optional.ofNullable(meteorological.getIndex()).orElse(new ArrayList<>()).forEach(whours -> html.append("<tr><td>").append(whours.getTitle()).append("</td><td>").append("<span style=\"color: #81C0C0;\">").append(whours.getLevel()).append("</span>").append("</td><td>").append("").append(whours.getDesc()).append("</td><td>").append("</td><td>").append("</td></tr>"));
         html.append("</table></body>" + "</html>");
         return html.toString();
     }
