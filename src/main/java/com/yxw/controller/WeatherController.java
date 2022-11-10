@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.yxw.entity.Weather;
 import com.yxw.service.WeatherService;
+import com.yxw.utils.RedisCache;
 import com.yxw.utils.Result;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Value;
@@ -31,6 +32,9 @@ public class WeatherController {
     private String appId;
     @Value("${request.weather.appsecret}")
     private String appSecret;
+    @Resource
+    private RedisCache redisCache;
+    private static final String KEY = "weather";
 
     /**
      * 得到天气发送邮箱
@@ -67,6 +71,7 @@ public class WeatherController {
 
     @PostMapping("/addWeather")
     public Result<?> addWeather(@RequestBody Weather weather) {
+        redisCache.deleteObject(KEY);
         boolean result = getResult(weather);
         if (!result) {
             return Result.error().message("邮箱重复");
@@ -78,6 +83,7 @@ public class WeatherController {
 
     @PostMapping("/updateWeather")
     public Result<?> updateWeather(@RequestBody Weather weather) {
+        redisCache.deleteObject(KEY);
         QueryWrapper<Weather> wrapper = new QueryWrapper<>();
         wrapper.eq("id", weather.getId());
         Weather one = weatherservice.getOne(wrapper);

@@ -1,0 +1,42 @@
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/**/*.xml
+request:
+  weather:
+    addpid: 你申请的天气ID
+    appsecret: 你申请的密钥
+    qq: 你发送的天气的邮箱
+server:
+  port: 8085
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    password: 你数据库密码
+    url: jdbc:mysql://你的地址:3306/test?zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&useOldAliasMetadataBehavior=true&useSSL=false
+    username: 你数据库账号
+  mail:
+    host: smtp.qq.com
+    password: 你QQ邮箱密钥
+    port: 465
+    properties:
+      mail:
+        smtp:
+          auth: true
+          ssl:
+            enable: true
+          starttls:
+            enable: true
+    username: 你的QQ邮箱
+  redis:
+    database: 0
+    host: Redis地址
+    jedis:
+      pool:
+        max-active: 20
+        max-idle: 10
+        max-wait: -1
+        min-idle: 0
+    password: ''
+    port: 6379
+    timeout: 0
+  resources:
+    static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/,classpath:/templates/

@@ -9,12 +9,14 @@ import com.yxw.entity.Meteorological;
 import com.yxw.entity.Weather;
 import com.yxw.mapper.WeatherMapper;
 import com.yxw.service.WeatherService;
+import com.yxw.utils.RedisCache;
 import lombok.Data;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
@@ -48,7 +50,10 @@ public class WeatherServiceImpl extends ServiceImpl<WeatherMapper, Weather> impl
     private WeatherService service;
     @Resource
     private JavaMailSender emailSender;
+    @Resource
+    private RedisCache redisCache;
     Object city;
+    private static final String KEY = "weather";
 
     /**
      * 发送简单信息
@@ -57,10 +62,13 @@ public class WeatherServiceImpl extends ServiceImpl<WeatherMapper, Weather> impl
      */
     @Override
     public boolean sendSimpleMessage() {
-        List<Weather> list;
-        QueryWrapper<Weather> wrapper = new QueryWrapper<>();
-        wrapper.eq("is_delete", 1);
-        list = service.list(wrapper);
+        List<Weather> list = redisCache.getCacheList(KEY);
+        if (CollectionUtils.isEmpty(list)) {
+            QueryWrapper<Weather> wrapper = new QueryWrapper<>();
+            wrapper.eq("is_delete", 1);
+            list = service.list(wrapper);
+            redisCache.setCacheList(KEY, list);
+        }
         for (Weather weather : list) {
             this.getWeather(weather);
             send(weather);
