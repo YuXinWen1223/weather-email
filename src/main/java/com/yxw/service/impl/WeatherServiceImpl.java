@@ -111,9 +111,9 @@ public class WeatherServiceImpl extends ServiceImpl<WeatherMapper, Weather> impl
             html.append("<h1 style=\"color: red;\">").append(list.getPrompt()).append("</h1>");
         }
         if (StringUtils.hasText(airTips)) {
-            html.append("<h1>").append(city).append("今日").append(meteorological.getWea()).append("，").append("空气质量").append(meteorological.getAirLevel()).append(",").append(airTips).append("</h1>");
+            html.append("<h1>").append(city).append("今日").append("<span style=\"color: #8F4586;\">").append(meteorological.getWea()).append("</span>").append("，").append("空气质量").append("<span style=\"color: #8F4586;\">").append(meteorological.getAirLevel()).append("</span>").append(",").append(airTips).append("</h1>");
         } else {
-            html.append("<h1>").append(city).append("今日").append(meteorological.getWea()).append("</h1>");
+            html.append("<h1>").append(city).append("今日").append("<span style=\"color: #8F4586;\">").append(meteorological.getWea()).append("</span>").append("</h1>");
         }
         Object alarmtype = meteorological.getAlarm().get("alarmtype");
         if (!Objects.isNull(alarmtype)) {
