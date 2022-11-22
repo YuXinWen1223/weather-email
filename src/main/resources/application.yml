@@ -26,17 +26,5 @@ spring:
           starttls:
             enable: true
     username: 你的QQ邮箱
-  redis:
-    database: 0
-    host: Redis地址
-    jedis:
-      pool:
-        max-active: 20
-        max-idle: 10
-        max-wait: -1
-        min-idle: 0
-    password: ''
-    port: 6379
-    timeout: 0
   resources:
     static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/,classpath:/templates/
