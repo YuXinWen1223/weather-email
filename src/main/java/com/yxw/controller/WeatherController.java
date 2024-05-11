@@ -104,8 +104,9 @@ public class WeatherController {
         w.setId(weather.getId());
         if (weather.getIsDelete().equals(1)) {
             w.setIsDelete(0);
+        }else {
+            w.setIsDelete(1);
         }
-        w.setIsDelete(1);
         weatherservice.updateById(w);
         return Result.ok().message("修改成功");
 
