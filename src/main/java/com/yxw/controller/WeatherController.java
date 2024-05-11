@@ -32,8 +32,6 @@ public class WeatherController {
     @Value("${request.weather.appsecret}")
     private String appSecret;
 
-    private static final String KEY = "weather";
-
     /**
      * 得到天气发送邮箱
      *
